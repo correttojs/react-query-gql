@@ -1,4 +1,4 @@
-import { PriceDocument } from "./price.generated";
+import { PriceDocument } from "../__mocks__/price.generated";
 import * as GQL from "../gqlRequest";
 import { useReactMutation, useReactQuery } from "../useReactQuery";
 import { renderHook } from "@testing-library/react-hooks";

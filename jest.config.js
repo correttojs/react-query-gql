@@ -2,18 +2,14 @@ module.exports = {
   moduleNameMapper: {
     "^@/(.*)": "<rootDir>/src/$1",
   },
-  moduleFileExtensions: ["js", "jsx", "ts", "tsx", "json", "graphql"],
+  moduleFileExtensions: ["js", "ts", "tsx"],
   modulePathIgnorePatterns: [
     "<rootDir>/.next",
     "<rootDir>/coverage/",
-    "<rootDir>/cypress",
     "<rootDir>/cache",
-    "<rootDir>/build",
+    "<rootDir>/dist",
+    "<rootDir>/example",
   ],
-  transform: {
-    "\\.tsx?$": "babel-jest",
-  },
-  globals: {
-    __VERSION__: "test",
-  },
+  preset: "ts-jest",
+  testEnvironment: "jsdom",
 };
