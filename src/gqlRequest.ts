@@ -5,7 +5,7 @@ import { getGqlOptions } from "./withReactQuery";
 
 export type GqlClientOptions = {
   endpoint: string;
-  headers: { [header: string]: string };
+  headers?: { [header: string]: string };
 };
 
 export type GqlResponse<TData> = {
@@ -101,12 +101,18 @@ export const gqlRequest = async <TData, TVariables>(
   if (!options) {
     options = getGqlOptions();
   }
+  if (!options.endpoint) {
+    throw new Error("Gql Endpoint option is mandatory");
+  }
   const { body, postUrl } = createRequest(options, document, variables);
   let result: GqlResponse<TData>;
 
   result = await postRequest({
     postUrl,
-    headers: options.headers,
+    headers: {
+      "Content-Type": "application/json",
+      ...(options.headers ?? {}),
+    },
     body,
     document,
   });

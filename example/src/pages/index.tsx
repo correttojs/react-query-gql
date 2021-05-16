@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import React, { useEffect } from "react";
+import React from "react";
 import { GetServerSideProps, NextPage } from "next";
 import { gqlRequest, useReactQuery, withReactQuery } from "../../dist";
 import { GetContinentsDocument } from "../graphql-operations";
@@ -43,24 +43,8 @@ const Home: NextPage = () => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const data = await gqlRequest(
-    GetContinentsDocument,
-    {},
-    {
-      endpoint: "https://countries.trevorblades.com",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const data = await gqlRequest(GetContinentsDocument, {});
   return { props: data };
 };
 
-export default withReactQuery(Home, {
-  gqlOptions: {
-    endpoint: "https://countries.trevorblades.com",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  },
-});
+export default withReactQuery(Home, {});

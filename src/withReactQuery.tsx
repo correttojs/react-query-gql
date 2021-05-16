@@ -13,8 +13,10 @@ export type GqlQueryClientConfig = {
   queryCache?: QueryCache;
   mutationCache?: MutationCache;
   defaultOptions?: DefaultOptions;
-  gqlOptions: GqlClientOptions;
+  gqlOptions?: GqlClientOptions;
 };
+
+let globalGqlOptions: GqlClientOptions;
 
 let queryClient: {
   client: QueryClient;
@@ -27,14 +29,18 @@ const getGqlReactQueryClient = (config: GqlQueryClientConfig) => {
 
     queryClient = {
       client: new QueryClient(queryClientConfig),
-      gqlOptions,
+      gqlOptions: gqlOptions,
     };
   }
   return queryClient;
 };
 
+export const setGlobalGqlOptions = (gqlOptions: GqlClientOptions) => {
+  globalGqlOptions = gqlOptions;
+};
+
 export const getGqlOptions = () => {
-  return queryClient.gqlOptions;
+  return queryClient?.gqlOptions ?? globalGqlOptions;
 };
 
 export function withReactQuery<PageProps>(
