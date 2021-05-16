@@ -1,6 +1,6 @@
 {
-  "name": "react-query-gql",
-  "version": "0.0.9",
+  "name": "@correttojs/react-query-gql",
+  "version": "0.0.10",
   "description": "React Query Gql Client",
   "license": "MIT",
   "scripts": {
